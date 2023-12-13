@@ -1,0 +1,17 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["../*"],
+      "~": ["../"]
+    },
+    "strictNullChecks": true,
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      },
+    ]
+  }
+}

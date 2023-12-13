@@ -1,0 +1,43 @@
+---
+import { cachedComputeDiagram, computeDiagram } from './main.ts'
+import type { RenderOptions } from './main.ts'
+
+export interface Props {
+  renderOptions?: RenderOptions
+  code: string
+}
+
+const { code = '', renderOptions = {} } = Astro.props
+
+let result
+try {
+  result = await cachedComputeDiagram(code, renderOptions)
+} catch (error) {
+  console.error(error)
+  result = await computeDiagram(`componentDiagram
+  @param componentBackground #f00
+  component error [
+    Could not render diagram
+  ]`, { mimeType: 'image/svg+xml', backgroundColor: 'transparent' })
+}
+---
+<div class="pintora">
+  {
+    result.type === 'svg'
+      ? <Fragment set:html={result.value}/>
+      : <img src={result.value} alt="diagram"/>
+  }
+</div>
+
+<style>
+    .pintora {
+        /* Necessary to avoid pixelated font rendering on macOS/Chrome, why? */
+        /* Also, why this looks awful on Safari with every settings tested? */
+        -webkit-font-smoothing: auto;
+        -moz-osx-font-smoothing: auto;
+        /* Necessary for Safari, which doesn't make the SVG full width, why? */
+        display: flex;
+        width: 100%;
+        text-overflow: clip;
+    }
+</style>
