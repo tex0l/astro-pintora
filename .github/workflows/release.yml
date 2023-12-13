@@ -13,7 +13,6 @@ jobs:
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
       - run: npm ci
-      - run: npm run prepublishOnly
       - id: get_npm_label
         run: if (npx semver $(node -p "require('./package.json').version") --range '>0.0.0'); then echo ::set-output name=NPM_LABEL::latest; else echo ::set-output name=NPM_LABEL::beta; fi; # Using the fact that semver by default considers that pre-releases do not respect stable ranges
       - run: npm publish --tag=${NPM_LABEL} --access public
