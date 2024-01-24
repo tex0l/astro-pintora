@@ -7,11 +7,6 @@
       "~/*": ["../*"],
       "~": ["../"]
     },
-    "strictNullChecks": true,
-    "plugins": [
-      {
-        "name": "@astrojs/ts-plugin"
-      },
-    ]
+    "strictNullChecks": true
   }
 }
