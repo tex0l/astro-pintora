@@ -1,6 +1,6 @@
 {
   "name": "astro-pintora",
-  "version": "0.0.2",
+  "version": "0.0.3-0",
   "description": "An Astro component for Pintora diagrams",
   "type": "module",
   "exports": {
