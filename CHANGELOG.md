@@ -1,5 +1,8 @@
 # Changelog
 
+## [0.0.3-0] - 2024-02-27
+- Run Pintora in a fork by default to have a completely separate JS scope because of https://github.com/hikerpig/pintora/issues/215 and https://github.com/hikerpig/pintora/issues/237. To opt-out, you can add the attribute `fork={false}` to the Pintora component, however if during one run the `fork` attribute is set to false, the global scope will be polluted.
+
 ## [0.0.2] - 2024-01-24
 - Added a homepage in the package.json [#2](https://github.com/tex0l/astro-pintora/pull/2), thanks [@stereobooster](https://github.com/stereobooster).
 - Updated dependencies.

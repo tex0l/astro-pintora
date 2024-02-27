@@ -26,7 +26,7 @@ activityDiagram
 ```
 
 ## Props
-This component accepts two props:
+This component accepts three props:
 - `code: string`: the Pintora diagram declaration
 - `renderOptions?: RenderOptions`: the rest of the [CLIRenderOptions](https://pintorajs.vercel.app/docs/advanced/api-usage/#renderoptions):
   - `devicePixelRatio?: number`: the pixel ratio.
@@ -34,6 +34,7 @@ This component accepts two props:
   - `backgroundColor?: string`: the background color.
   - `pintoraConfig?: Partial<PintoraConfig>`: the Pintora config object, can be used to override the theme through `pintoraConfig.themeConfig.theme`.
   - `width?: number`: width of the output.
+- `fork?: boolean`: defaults to being `true`, if explicitly set to `false`, it does not fork the process to generate the diagram, which leads to side effects and global scope pollution due to open issues in pintora: https://github.com/hikerpig/pintora/issues/237 and https://github.com/hikerpig/pintora/issues/215.
 
 For example, to render an SVG with a transparent background that uses the `dark` theme:
 

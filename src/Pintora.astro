@@ -5,20 +5,23 @@ import type { RenderOptions } from './main.ts'
 export interface Props {
   renderOptions?: RenderOptions
   code: string
+  fork?: boolean
 }
 
-const { code = '', renderOptions = {} } = Astro.props
+const { code = '', renderOptions = {}, fork } = Astro.props
+
+const forkProcess = !(fork === false) // if it's not defined,
 
 let result
 try {
-  result = await cachedComputeDiagram(code, renderOptions)
+  result = await cachedComputeDiagram(code, renderOptions, forkProcess)
 } catch (error) {
   console.error(error)
   result = await computeDiagram(`componentDiagram
   @param componentBackground #f00
   component error [
     Could not render diagram
-  ]`, { mimeType: 'image/svg+xml', backgroundColor: 'transparent' })
+  ]`, { mimeType: 'image/svg+xml', backgroundColor: 'transparent' }, forkProcess)
 }
 ---
 <div class="pintora">
