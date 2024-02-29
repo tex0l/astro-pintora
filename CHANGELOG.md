@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.0.3-3] - 2024-02-29
+- Expose the waterfall object to sync renders with whatever has to have a clean env
+
+## [0.0.3-2] - 2024-02-29
+- Added a waterfall to prevent parallel runs
+
 ## [0.0.3-1] - 2024-02-29
 - Reverted change as it does not work in build mode... Attempt to update @pintora/cli to 0.7.2 which cleans up the patches to global it makes.
 

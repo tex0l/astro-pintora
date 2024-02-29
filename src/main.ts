@@ -33,7 +33,7 @@ const generateHash = (input: string): string => {
 
 let guardian: Promise<{ error: boolean, result: any }> = Promise.resolve({ error: false, result: undefined })
 
-const waterfall = <A extends any[], B> (func: (...a: A) => Promise<B>): (...a: A) => Promise<B> => async (...args: A) => {
+export const waterfall = <A extends any[], B> (func: (...a: A) => Promise<B>): (...a: A) => Promise<B> => async (...args: A) => {
   guardian = guardian.then(async () => {
     return await func(...args)
       .then(result => ({ error: false, result }), result => ({ error: true, result }))
