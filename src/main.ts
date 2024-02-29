@@ -31,13 +31,28 @@ const generateHash = (input: string): string => {
   return hash.digest().toString('hex')
 }
 
+let guardian: Promise<{ error: boolean, result: any }> = Promise.resolve({ error: false, result: undefined })
+
+export const waterfall = <A extends any[], B> (func: (...a: A) => Promise<B>): (...a: A) => Promise<B> => async (...args: A) => {
+  guardian = guardian.then(async () => {
+    return await func(...args)
+      .then(result => ({ error: false, result }), result => ({ error: true, result }))
+  })
+  return await guardian.then(async ({ error, result }) => {
+    if (error) return await Promise.reject(result)
+    else return await Promise.resolve(result)
+  })
+}
+
+const waterFallenRender = waterfall(render as (opts: CLIRenderOptions) => Promise<string | Buffer>)
+
 export const computeDiagram = async (code: string, renderOptions: RenderOptions): Promise<Result> => {
   const opts = {
     code,
     ...renderOptions
   }
 
-  const result = await render(opts)
+  const result = await waterFallenRender(opts)
 
   if (result instanceof Buffer) {
     return {

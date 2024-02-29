@@ -1,5 +1,6 @@
 # generated types
-.astro/
+example/.astro/
+example/dist/
 
 # dependencies
 node_modules/
@@ -16,5 +17,3 @@ pnpm-debug.log*
 # Jetbrains-sepcific files
 .idea/*
 
-# Specific to the project
-public_to_encrypt/*

@@ -5,6 +5,7 @@ import type { RenderOptions } from './main.ts'
 export interface Props {
   renderOptions?: RenderOptions
   code: string
+  fork?: boolean
 }
 
 const { code = '', renderOptions = {} } = Astro.props

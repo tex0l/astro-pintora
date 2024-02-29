@@ -26,7 +26,7 @@ activityDiagram
 ```
 
 ## Props
-This component accepts two props:
+This component accepts three props:
 - `code: string`: the Pintora diagram declaration
 - `renderOptions?: RenderOptions`: the rest of the [CLIRenderOptions](https://pintorajs.vercel.app/docs/advanced/api-usage/#renderoptions):
   - `devicePixelRatio?: number`: the pixel ratio.
