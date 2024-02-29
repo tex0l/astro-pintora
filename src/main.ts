@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import render from './nonPollutingPintoraRenderCaller'
+import { render } from '@pintora/cli'
 import type { CLIRenderOptions } from '@pintora/cli/lib/render'
 import type { PintoraConfig } from '@pintora/core/lib/config'
 
@@ -31,13 +31,13 @@ const generateHash = (input: string): string => {
   return hash.digest().toString('hex')
 }
 
-export const computeDiagram = async (code: string, renderOptions: RenderOptions, forkProcess: boolean): Promise<Result> => {
+export const computeDiagram = async (code: string, renderOptions: RenderOptions): Promise<Result> => {
   const opts = {
     code,
     ...renderOptions
   }
 
-  const result = await render(opts, forkProcess)
+  const result = await render(opts)
 
   if (result instanceof Buffer) {
     return {
@@ -65,12 +65,11 @@ const computeUniqueKey = (code: string, renderOptions: RenderOptions): string =>
 
 export const cachedComputeDiagram = async (
   code: string,
-  renderOptions: RenderOptions,
-  forkProcess: boolean
+  renderOptions: RenderOptions
 ): Promise<Result> => {
   const key = computeUniqueKey(code, renderOptions)
   if (cache[key] === undefined) {
-    cache[key] = await computeDiagram(code, renderOptions, forkProcess)
+    cache[key] = await computeDiagram(code, renderOptions)
   }
   return cache[key]
 }

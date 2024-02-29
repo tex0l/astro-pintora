@@ -42,8 +42,8 @@
     "astro": "^3.0.0 || ^4.0.0"
   },
   "dependencies": {
-    "@pintora/cli": "^0.6.3",
-    "@pintora/standalone": "^0.6.3"
+    "@pintora/cli": "^0.7.2",
+    "@pintora/standalone": "^0.7.2"
   },
   "license": "MIT"
 }

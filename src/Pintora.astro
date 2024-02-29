@@ -8,20 +8,18 @@ export interface Props {
   fork?: boolean
 }
 
-const { code = '', renderOptions = {}, fork } = Astro.props
-
-const forkProcess = !(fork === false) // if it's not defined,
+const { code = '', renderOptions = {} } = Astro.props
 
 let result
 try {
-  result = await cachedComputeDiagram(code, renderOptions, forkProcess)
+  result = await cachedComputeDiagram(code, renderOptions)
 } catch (error) {
   console.error(error)
   result = await computeDiagram(`componentDiagram
   @param componentBackground #f00
   component error [
     Could not render diagram
-  ]`, { mimeType: 'image/svg+xml', backgroundColor: 'transparent' }, forkProcess)
+  ]`, { mimeType: 'image/svg+xml', backgroundColor: 'transparent' })
 }
 ---
 <div class="pintora">
